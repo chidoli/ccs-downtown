@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2016 Google Inc.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS Downtown</title>
+    <!-- Material Design Theming -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Material Design Components -->
+    <link rel="stylesheet" href="/css/material-components-web.css">
+
+    <!-- Import and configure the Firebase SDK -->
+    <!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
+    <!-- If you do not serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
+    <script src="/__/firebase/4.9.1/firebase-app.js"></script>
+    <script src="/__/firebase/4.9.1/firebase-auth.js"></script>
+    <script src="/__/firebase/4.9.1/firebase-database.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/db.js"></script>
+    <script src="/js/ui.js"></script>
+    <script src="/js/uiDate.js"></script>
+    <script src="/js/uiSelect.js"></script>
+    <script src="/js/util.js"></script>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body class="mdc-typography">
+    <div class="mdc-layout">
+        <!-- Header section containing title -->
+        <header class="mdc-toolbar">
+            <div class="mdc-toolbar__row">
+                <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                    <a href="#" class="material-icons mdc-toolbar__menu-icon">menu</a>
+                    <span class="mdc-toolbar__title">CCS Downtown</span>
+                </section>
+                <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+                    <div id="logout-form">
+                        <a href="#" id="sign-out" class="material-icons mdc-toolbar__icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" aria-label="Print this page" alt="Print this page">arrow_back</a>
+                    </div>
+                </section>
+            </div>
+        </header>
+
+        <main class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <!-- Container for the demo -->
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3"></div>
+                <div id='profile' class="mdc-card mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                    <div class="">
+                        <h2 class="">Profile</h2>
+                    </div>
+                    <div id="login-form">
+                        <p>Enter an email and password below and sign in to an existing account</p>
+                        <div id="email-text-field" class="mdc-text-field mdc-text-field--upgraded">
+                            <input type="text" class="mdc-text-field__input" id="email" aria-controls="email">
+                            <label for="email" class="mdc-text-field__label">Email</label>
+                            <div class="mdc-line-ripple"></div>
+                        </div>
+                        <div id="password-text-field" class="mdc-text-field mdc-text-field--upgraded">
+                            <input id="password" type="password" class="mdc-text-field__input" id="password" aria-controls="password">
+                            <label for="password" class="mdc-text-field__label">Password</label>
+                            <div class="mdc-line-ripple"></div>
+                        </div>
+                        <br/><br/>
+                        <button class="mdc-button mdc-button--raised mdc-ripple-upgraded" id="sign-in" name="signin">Sign In</button>
+                        <button class="mdc-button mdc-button--raised mdc-ripple-upgraded" id="password-reset" name="verify-email">Send Password Reset Email</button>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3"></div>
+                <div id="offering" class="mdc-card mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                    <div class="">
+                        <h2 class="">Offering</h2>
+                    </div>
+                    <div class="">
+                        <div id="date-text-field" class="mdc-text-field mdc-text-field--upgraded">
+                            <input type="text" class="mdc-text-field__input" id="date" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" aria-controls="date">
+                            <label for="date" class="mdc-text-field__label">Date</label>
+                            <div class="mdc-line-ripple"></div>
+                            <div class="mdc-line-ripple"></div>
+                        </div>
+                        <div id="name-text-field" class="mdc-text-field mdc-text-field--upgraded">
+                            <input type="text" class="mdc-text-field__input" id="name" aria-controls="name">
+                            <label for="name" class="mdc-text-field__label">Name</label>
+                            <div class="mdc-line-ripple"></div>
+                        </div>
+                        <div id="type" class="mdc-select" role="listbox">
+                            <div class="mdc-select__surface" tabindex="0">
+                                <div class="mdc-select__label">Type</div>
+                                <div class="mdc-select__selected-text"></div>
+                                <div class="mdc-select__bottom-line"></div>
+                            </div>
+                            <div class="mdc-menu mdc-select__menu">
+                                <ul class="mdc-list mdc-menu__items">
+                                    <li class="mdc-list-item" role="option" id="주일헌금" tabindex="0">주일헌금</li>
+                                    <li class="mdc-list-item" role="option" id="감사헌금" tabindex="0">감사헌금</li>
+                                    <li class="mdc-list-item" role="option" id="십일조" tabindex="0">십일조</li>
+                                    <li class="mdc-list-item" role="option" id="Others" tabindex="0">Others</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="method" class="mdc-select" role="listbox">
+                            <div class="mdc-select__surface" tabindex="0">
+                                <div class="mdc-select__label">Method</div>
+                                <div class="mdc-select__selected-text"></div>
+                                <div class="mdc-select__bottom-line"></div>
+                            </div>
+                            <div class="mdc-menu mdc-select__menu">
+                                <ul class="mdc-list mdc-menu__items">
+                                    <li class="mdc-list-item" role="option" id="Cash" tabindex="0">Cash</li>
+                                    <li class="mdc-list-item" role="option" id="Check" tabindex="0">Check</li>
+                                    <li class="mdc-list-item" role="option" id="Venmo" tabindex="0">Venmo</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="amount-text-field" class="mdc-text-field mdc-text-field--upgraded">
+                            <input type="text" class="mdc-text-field__input" id="amount" aria-controls="amount">
+                            <label for="amount" class="mdc-text-field__label">Amount</label>
+                            <div class="mdc-line-ripple"></div>
+                        </div>
+                        <button class="mdc-button mdc-button--raised mdc-ripple-upgraded" id="put-offer" name="putoffer">Put</button>
+                        <br/><br/>
+                        <button class="mdc-button mdc-button--raised mdc-ripple-upgraded" id="download-offers" name="downloadLatestOffers"><i class="material-icons">file_download</i>
+Download Latest</button>
+                        <button class="mdc-button mdc-button--raised mdc-ripple-upgraded" id="all-offers" name="allOffers">All</button>
+                        <button class="mdc-button mdc-button--raised mdc-ripple-upgraded" id="latest-offers" name="latestOffers">Latest</button>
+                        <button class="mdc-button mdc-button--raised mdc-ripple-upgraded" id="clear-offers" name="clearOffers">Clear</button>
+                        <pre><code id="offering-details"></code></pre>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script type="text/javascript" src="/js/scripts.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/material-components-web.js"></script>
+</body>
+
+</html>

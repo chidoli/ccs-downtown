@@ -1,0 +1,44 @@
+:root {
+      --mdc-theme-primary: #2196F3 !important;
+      --mdc-theme-secondary: black !important;
+      --mdc-theme-primary-light: #90CAF9 !important;
+      --mdc-theme-primary-dark: #1565C0 !important;
+}
+
+body {
+    margin: 0;
+}
+
+.fixed-header {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex
+}
+
+.text-field {
+	display: inline;
+	width: auto;
+}
+
+.mdc-select:not(.mdc-select--disabled) .mdc-select__surface:focus .mdc-select__label, .mdc-select:not(.mdc-select--disabled).mdc-select--open .mdc-select__label {
+    color: var(--mdc-theme-primary, #6200ee); 
+}
+
+input[type="date"] {
+    width: 166px;
+    height: 18px;
+}
+
+.mdc-select__surface {
+    padding-bottom: 13px;
+}
+
+::-webkit-datetime-edit-year-field:not([aria-valuenow]),
+::-webkit-datetime-edit-month-field:not([aria-valuenow]),
+::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
+    color: transparent;
+}
+
+.secondary-filled-button {
+    background-color : var(--mdc-theme-secondary, black) !important;
+}
